@@ -22,6 +22,24 @@ Activation score = (median signal during the expression − median at rest) ÷ r
 
 ![Raw EMG at three sites](results/2_waveforms_three_sites.png)
 
+## Gen 1 bench test: brow raise on video
+
+Before building the sensor into a mask, I checked that one forehead channel reliably sees a brow raise. The Arduino stays on the desk; two electrodes sit above the right brow about 2.5 cm apart, the reference behind the ear.
+
+**[▶ Watch the test video](https://cdn.jsdelivr.net/gh/JerryWu777/MyoMask-EMG@main/results/gen1/gen1_brow_raise_test.mp4)** (webcam and live EMG in one frame, 30 s)
+
+![Gen 1 brow raise test](results/gen1/gen1_brow_raise_chart.png)
+
+**Protocol:** rest 5 s (baseline), then (relax 4 s, raise eyebrows 4 s) × 3 rounds, cued by beeps.
+
+| Round | Relax (mean) | Raise (mean) | Raise ÷ relax |
+|---|---:|---:|---:|
+| 1 | 66 | 100 | ×1.52 |
+| 2 | 77 | 122 | ×1.58 |
+| 3 | 96 | 135 | ×1.41 |
+
+Every raise was higher than the relax before it. The key fix was unplugging the laptop charger: with it plugged in, 50 Hz mains noise coupled through the electrodes and saturated the ADC at 1023.
+
 ## Setup
 
 - EMG sensor board, single channel, ±9 V from two 9 V batteries; SIG → Arduino A0, GND → Arduino GND
@@ -41,6 +59,9 @@ Activation score = (median signal during the expression − median at rest) ÷ r
 | `code/emg_site_en.py` | Recorder: voice cues, serial capture, CSV, activation scores, plots |
 | `code/emg_avatar_demo.py` | Avatar test: turns the forehead score into an avatar expression (live, simulated or replaying a CSV) |
 | `code/workflow_diagram.py` | Draws the workflow diagram |
+| `code/emg_record_gen1.py` | Gen 1 recorder: webcam and live EMG curve in one video, beep-cued brow raise test, CSV log |
+| `data/gen1_brow_raise_213902.csv` | Gen 1 brow raise recording: time, raw A0, smoothed, phase |
+| `results/gen1/` | Gen 1 test video and chart |
 | `data/*.csv` | Raw recordings, one per site: time in seconds, A0 value 0–1023 |
 | `results/*.png` | Summary chart, waveforms of all sites, one figure per site |
 
@@ -51,6 +72,7 @@ pip install -r requirements.txt
 python code/emg_site_en.py forehead --port COM4   # record one site (forehead / eye / mouth)
 python code/emg_site_en.py compare                # compare the latest recording of every site
 python code/emg_avatar_demo.py --replay           # replay data/forehead_134856.csv into the avatar
+python code/emg_record_gen1.py --auto 8           # Gen 1: guided brow raise test, saves video + CSV
 ```
 
 Close the Arduino IDE Serial Monitor first so the port is free.
