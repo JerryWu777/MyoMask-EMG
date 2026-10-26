@@ -1,6 +1,6 @@
 # MyoMask · Facial EMG Experiment
 
-Code and data behind the sensor test in my MyoMask portfolio project: which facial muscles tell expressions apart, measured with a single-channel EMG sensor, an Arduino Uno and a Python recorder. Everything here was built, coded and recorded by me, with the help of Claude for coding.
+Code and data behind the sensor test in my MyoMask portfolio project: which facial muscles tell expressions apart, measured with a single-channel EMG sensor, an Arduino Uno and a Python recorder. I built the hardware and ran the experiments; Claude helped write the Python tools. See [How this was made](#how-this-was-made) below.
 
 ![Activation score per site](results/1_activation_summary.png)
 
@@ -78,3 +78,18 @@ python code/emg_record_gen1.py --auto 8           # Gen 1: guided brow raise tes
 Close the Arduino IDE Serial Monitor first so the port is free.
 
 **Safety note:** connect the two 9 V batteries as +9 V / GND / −9 V exactly as marked on the sensor board. Reversing them burned one of my boards during the Gen 2 test.
+
+## How this was made
+
+**My work**
+- All hardware: wiring the EMG sensor board, the ±9 V battery supply and electrode placement at each site.
+- Designing and running the experiments: the protocol, the three test sites and recording myself as the participant.
+- The Arduino sketch that reads the sensor, and the hardware check that confirmed the board worked.
+- Producing the final result charts from the recordings and interpreting the results.
+
+**With Claude**
+- The Python recorder and analysis scripts: voice cues, CSV logging, activation scores, the plotting code and the Gen 1 video recorder.
+- Help running the recording sessions and publishing this repository.
+
+**Found together**
+- During testing, we traced the signal saturating at 1023 to 50 Hz mains noise from the plugged-in laptop charger.
