@@ -1,6 +1,6 @@
 # MyoMask · Facial EMG Experiment
 
-Code and data behind the sensor test in my MyoMask portfolio project: which facial muscles tell expressions apart, measured with a single-channel EMG sensor, an Arduino Uno and a Python recorder. Everything here was built, coded and recorded by me.
+Code and data behind the sensor test in my MyoMask portfolio project: which facial muscles tell expressions apart, measured with a single-channel EMG sensor, an Arduino Uno and a Python recorder. Everything here was built, coded and recorded by me, with the help of Claude for coding.
 
 ![Activation score per site](results/1_activation_summary.png)
 
